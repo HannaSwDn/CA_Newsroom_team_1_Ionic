@@ -1,0 +1,33 @@
+= form_with model: @article, url: cms_article_path  do |form|
+  - if @article.errors.any?
+    %h2
+      = pluralize(@article.errors.count, "error")
+      prohibited
+      this article from being saved:
+    %ul
+      - @article.errors.full_messages.each do |msg|
+        %li= msg 
+  %p
+    = form.label :title
+    = form.text_field :title
+  %p
+    = form.label :lede
+    = form.text_area :lede
+  %p
+    = form.label :body
+    = form.text_area :body
+  %p
+    = form.label :image
+    = form.file_field :image
+  %p
+    = form.label :author
+    = form.label :user_id, value: @article.user.first_name
+  %br
+    = form.label :category
+    .Category= form.collection_select :category_id, Category.all, :id, :name 
+
+  %p
+    = form.submit
+
+
+= link_to 'Back to list', cms_articles_path
