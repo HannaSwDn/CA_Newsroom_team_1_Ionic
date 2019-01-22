@@ -16,4 +16,12 @@ export class Page {
     return element(by.css("a")).getText()
   }
 
+  getArticleLede() {
+    return element(by.css("h5")).getText()
+  }
+
+  getArticleCategory() {
+    return element(by.css("p")).getText()
+  }
+
 }

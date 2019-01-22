@@ -21,5 +21,13 @@ describe("App", () => {
     it("should see news title", () => {
       expect(page.getArticleTitle()).toContain("Breaking News");
     });
+
+    it("should see news lede", () => {
+      expect(page.getArticleLede()).toContain("This is fun!");
+    });
+
+    it("should see news category", () => {
+      expect(page.getArticleCategory()).toContain("Sports");
+    });
   });
 });
