@@ -1,7 +1,8 @@
+import { ArticlesCallProvider } from "./../../providers/articles-call/articles-call";
+
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
-import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+import { NavController, NavParams } from "ionic-angular";
+import "rxjs/add/operator/map";
 
 @Component({
   selector: "page-home",
@@ -9,12 +10,16 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
   articles: any;
-  constructor(public navCtrl: NavController, private http: HttpClient) {}
 
-  ionViewDidLoad = () => {
-    this.http.get('https://cors-anywhere.herokuapp.com/https://craftynews.herokuapp.com/api/articles').subscribe((response) => {
-      this.articles = response.articles;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private articlesCall: ArticlesCallProvider
+  ) {}
+
+  ionViewDidLoad() {
+    this.articlesCall.getArticles().subscribe(res => {
+      this.articles = res.articles;
     });
   }
 }
-
